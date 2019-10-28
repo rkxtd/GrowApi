@@ -1,0 +1,27 @@
+{
+  "name": "growapi",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.4",
+    "crypto-random-string": "^3.0.1",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-healthcheck": "^0.1.0",
+    "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
+    "mongoose": "^5.7.7",
+    "mongoose-type-email": "^1.0.11",
+    "mongoose-unique-validator": "^2.0.3",
+    "morgan": "~1.9.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "pug": "^2.0.4"
+  }
+}
