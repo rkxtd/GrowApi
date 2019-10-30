@@ -7,11 +7,9 @@ const db = require('./db');
 const bodyParser = require("body-parser");
 const passport = require('passport');
 const jwtStrategy = require('./auth/jwt.strategy');
-
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
-
 const app = express();
 
 app.use(bodyParser.urlencoded({

@@ -103,4 +103,28 @@ router.put('/:userId', async (req, res) => {
   }
 });
 
+router.put('/promote/:userId', async (req, res) => {
+  const { params: { userId }, body: { role }, user: requester } = req;
+  if(!mongoose.Types.ObjectId.isValid(userId)) return res.status(400).json({err: 'USER_ID_INCORRECT', id: userId});
+  if (!['admin', 'user'].includes(role)) return res.status(400).json({err: 'USER_ROLE_INCORRECT', id: userId});
+
+  const user = await UserModel.findById(userId);
+  if (!user) return res.status(404).json({err: 'USER_NOT_FOUND', id: userId});
+  const acl = user.acl();
+  const permission = await acl
+      .can(requester.role)
+      .execute('promote')
+      .on('user');
+  if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: userId});
+
+  user.set({role});
+
+  try {
+    await user.save();
+    return res.status(202).json({msg: 'USER_PROMOTED', id: userId})
+  } catch (err) {
+    return res.status(400).json({err: 'USER_UPDATE_FAILED', msg: err});
+  }
+});
+
 module.exports = router;

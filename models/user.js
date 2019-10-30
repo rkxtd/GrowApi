@@ -65,7 +65,8 @@ ac.grant('admin')
     .execute('read').on('user')
     .execute('create').on('user')
     .execute('update').on('user')
-    .execute('delete').on('user');
+    .execute('delete').on('user')
+    .execute('promote').on('user');
 
 // ALLOW: Admin:Read:Users
 ac.grant('admin')
@@ -99,4 +100,4 @@ UserSchema.methods.acl = function() {
     return ac;
 };
 
-module.exports = mongoose.model('UserModel', UserSchema);
+module.exports = mongoose.model('Users', UserSchema);
