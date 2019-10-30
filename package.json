@@ -17,11 +17,13 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "mongoose": "^5.7.7",
+    "mongoose-paginate": "^5.0.3",
     "mongoose-type-email": "^1.0.11",
     "mongoose-unique-validator": "^2.0.3",
     "morgan": "~1.9.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "pug": "^2.0.4"
+    "pug": "^2.0.4",
+    "role-acl": "^4.1.2"
   }
 }
