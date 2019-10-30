@@ -11,8 +11,9 @@ router.post('/', async ({body: {login, passwd}}, res) => {
 
     const validate = await user.validatePassword(passwd);
     if (!validate) return res.status(401).json({err: 'ACCESS_DENIED', login});
+    const {_id:id, email, role} = user;
 
-    const payload = {id: user._id, email: user.email};
+    const payload = { id, email, role };
     const token = jwt.sign(payload, jwtOptions.secretOrKey, { expiresIn: jwtOptions.tokenTTL });
     return res.json({
         message: "ok",

@@ -11,6 +11,7 @@ const UserSchema = new Schema({
     id: Schema.Types.ObjectId,
     login: {type: String, required: true, createIndexes: { unique: true }},
     salt: {type: String},
+    role: {type: String, enum: ['user', 'admin']},
     passwd: {type: String, required: true, update: true},
     email: {type: mongoose.SchemaTypes.Email, required: true, createIndexes: { unique: true }, update: true},
     firstName: {type: String, required: true, update: true},
@@ -18,7 +19,7 @@ const UserSchema = new Schema({
     createdDate: {type: Date, default: Date.now()},
     profilePicture: {type: String, update: true},
 });
-debugger;
+
 UserSchema.plugin(mongoosePaginate);
 
 // ALLOW: Anonymous:Create:User
@@ -28,17 +29,47 @@ ac.grant('anonymous')
 
 // ALLOW: User:Read:User
 ac.grant('user')
+    .condition({
+        Fn: 'EQUALS',
+        args: {
+            'requester': '$.owner'
+        }})
     .execute('read')
-    .on('user');
+    .on('user', ['_id', 'passwd', 'email', 'firstName', 'lastName', 'profilePicture']);
 
-// ALLOW: User:Edit:User(Cond: Equals(Requester, Owner))
+// ALLOW: User:Read:Users
+ac.grant('user')
+    .execute('read')
+    .on('users', ['_id', 'email', 'firstName', 'lastName', 'profilePicture']);
+
+// ALLOW: User:Update:User(Cond: Equals(Requester, Owner))
+ac.grant('user')
+    .condition({
+        Fn: 'EQUALS',
+        args: {
+            'requester': '$.owner'
+        }})
+    .execute('update')
+    .on('user', ['_id', 'passwd', 'email', 'firstName', 'lastName', 'profilePicture']);
+
+// ALLOW: User:Delete:User(Cond: Equals(Requester, Owner))
 ac.grant('user')
     .condition({
         Fn: 'EQUALS',
         args: {'requester': '$.owner'}})
-    .execute('update')
-    .on('user', ['passwd', 'email', 'firstName']);
+    .execute('delete')
+    .on('user');
 
+// ALLOW: Admin:CRUD:User
+ac.grant('admin')
+    .execute('read').on('user')
+    .execute('create').on('user')
+    .execute('update').on('user')
+    .execute('delete').on('user');
+
+// ALLOW: Admin:Read:Users
+ac.grant('admin')
+    .execute('read').on('users');
 
 UserSchema.pre('save', async function(next) {
     if (!this.isModified('passwd')) return next();
@@ -55,5 +86,17 @@ UserSchema.methods.validatePassword = async function(passwd) {
     return await bcrypt.compare(passwd, this.passwd);
 };
 
+UserSchema.methods.getUpdateFields = function() {
+    const fields = [];
+    for (let [field, { update }] of Object.entries(this.schema.obj)) {
+        if (!update) continue;
+        fields.push(field)
+    }
+    return fields;
+};
+
+UserSchema.methods.acl = function() {
+    return ac;
+};
 
 module.exports = mongoose.model('UserModel', UserSchema);
