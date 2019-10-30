@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const UserModel = require('../models/user');
+const mongoose = require('mongoose');
 
-/* GET users listing. */
 router.get('/', async (req, res) => {
   const {query: {skip:offset = 0, limit = 10}, user} = req;
   const acl = user.acl();
@@ -19,9 +19,7 @@ router.get('/', async (req, res) => {
     } else {
       users.docs = users.docs.map(user => {
         const ret = {};
-        console.log(user);
         for (attr of permission.attributes) {
-          console.log(attr)
           ret[attr] = user[attr];
         }
         return ret;
@@ -62,7 +60,11 @@ router.delete('/:userId', async ({params: { userId }, body, user: requester}, re
 
 router.put('/:userId', async (req, res) => {
   const { params: { userId }, body, user: requester } = req;
-  const user = await UserModel.findOne({ _id:userId });
+  if(!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).json({err: 'USER_ID_INCORRECT', id: userId});
+  }
+
+  const user = await UserModel.findById(userId);
   if (!user) return res.status(404).json({err: 'USER_NOT_FOUND', id: userId});
   const acl = user.acl();
   const permission = await acl
@@ -79,19 +81,19 @@ router.put('/:userId', async (req, res) => {
     updateFields = allUpdateFields.filter(value => -1 !== permission.attributes.indexOf(value))
   }
 
-  const notUpdatedFields = [];
+  const warnings = [];
   for (let field of Object.keys(body)) {
-    if(field in updateFields) {
+    if(updateFields.includes(field)) {
       user.set({[field]: body[field]});
     } else {
-      notUpdatedFields.push(field);
+      warnings.push({msg: 'FIELD_UPDATE_ERROR', data: field});
     }
   }
 
   try {
     await user.save();
-    if (notUpdatedFields.length) {
-      return res.status(202).json({msg: 'USER_SAVED', id: userId, wrn: {msg: 'FIELD_UPDATE_ERROR', data: notUpdatedFields}})
+    if (warnings.length) {
+      return res.status(202).json({msg: 'USER_SAVED', id: userId, warnings })
     } else {
       return res.status(202).json({msg: 'USER_SAVED', id: userId})
     }

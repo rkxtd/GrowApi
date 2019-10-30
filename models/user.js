@@ -50,7 +50,7 @@ ac.grant('user')
             'requester': '$.owner'
         }})
     .execute('update')
-    .on('user', ['_id', 'passwd', 'email', 'firstName', 'lastName', 'profilePicture']);
+    .on('user', ['passwd', 'email', 'firstName', 'lastName', 'profilePicture']);
 
 // ALLOW: User:Delete:User(Cond: Equals(Requester, Owner))
 ac.grant('user')
