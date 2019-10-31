@@ -1,4 +1,4 @@
-const acl = require('./base');
+const acl = require('./acl');
 
 // ALLOW: Admin:CRUD:User
 acl.grant('admin')

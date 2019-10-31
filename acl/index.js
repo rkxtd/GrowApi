@@ -1,4 +1,4 @@
-const acl = require('./base');
+const acl = require('./acl');
 require('./admin');
 require('./user');
 require('./guest');

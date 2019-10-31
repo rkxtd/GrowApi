@@ -1,4 +1,4 @@
-const acl = require('./base');
+const acl = require('./acl');
 
 // ALLOW: User:Read:User
 acl.grant('user')
