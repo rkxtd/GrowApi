@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const mongoosePaginate = require('mongoose-paginate');
-const AccessControl = require('role-acl');
 require('mongoose-type-email');
 
-const ac = new AccessControl();
 const SALT_WORK_FACTOR = 10;
 const Schema = mongoose.Schema;
 const UserSchema = new Schema({
@@ -21,57 +19,6 @@ const UserSchema = new Schema({
 });
 
 UserSchema.plugin(mongoosePaginate);
-
-// ALLOW: Anonymous:Register:User
-ac.grant('anonymous')
-    .execute('register')
-    .on('user');
-
-// ALLOW: User:Read:User
-ac.grant('user')
-    .condition({
-        Fn: 'EQUALS',
-        args: {
-            'requester': '$.owner'
-        }})
-    .execute('read')
-    .on('user', ['_id', 'passwd', 'email', 'firstName', 'lastName', 'profilePicture']);
-
-// ALLOW: User:Read:Users
-ac.grant('user')
-    .execute('read')
-    .on('users', ['_id', 'email', 'firstName', 'lastName', 'profilePicture']);
-
-// ALLOW: User:Update:User(Cond: Equals(Requester, Owner))
-ac.grant('user')
-    .condition({
-        Fn: 'EQUALS',
-        args: {
-            'requester': '$.owner'
-        }})
-    .execute('update')
-    .on('user', ['passwd', 'email', 'firstName', 'lastName', 'profilePicture']);
-
-// ALLOW: User:Delete:User(Cond: Equals(Requester, Owner))
-ac.grant('user')
-    .condition({
-        Fn: 'EQUALS',
-        args: {'requester': '$.owner'}})
-    .execute('delete')
-    .on('user');
-
-// ALLOW: Admin:CRUD:User
-ac.grant('admin')
-    .execute('read').on('user')
-    .execute('create').on('user')
-    .execute('update').on('user')
-    .execute('delete').on('user')
-    .execute('register').on('user')
-    .execute('promote').on('user');
-
-// ALLOW: Admin:Read:Users
-ac.grant('admin')
-    .execute('read').on('users');
 
 UserSchema.pre('save', async function(next) {
     if (!this.isModified('passwd')) return next();
@@ -95,10 +42,6 @@ UserSchema.methods.getUpdateFields = function() {
         fields.push(field)
     }
     return fields;
-};
-
-UserSchema.methods.acl = function() {
-    return ac;
 };
 
 module.exports = mongoose.model('Users', UserSchema);

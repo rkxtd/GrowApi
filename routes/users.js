@@ -1,11 +1,13 @@
 const express = require('express');
-const router = express.Router();
-const UserModel = require('../models/user');
 const mongoose = require('mongoose');
+
+const UserModel = require('../models/user');
+const acl = require('../acl');
+
+const router = express.Router();
 
 router.get('/', async (req, res) => {
   const {query: {skip:offset = 0, limit = 10}, user} = req;
-  const acl = user.acl();
   const permission = await acl
       .can(user.role)
       .execute('read')
@@ -33,7 +35,6 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async ({body, user}, res) => {
-  const acl = user.acl();
   const permission = await acl
       .can(user.role)
       .execute('create')
@@ -55,7 +56,6 @@ router.delete('/:userId', async ({params: { userId }, body, user: requester}, re
   const user = await UserModel.findOne({ _id:userId });
   if (!user) return res.status(404).json({err: 'USER_NOT_FOUND', id: userId});
 
-  const acl = user.acl();
   const permission = await acl
       .can(requester.role)
       .context({ requester: requester._id.toString(), owner: user._id.toString() })
@@ -77,7 +77,6 @@ router.put('/:userId', async (req, res) => {
 
   const user = await UserModel.findById(userId);
   if (!user) return res.status(404).json({err: 'USER_NOT_FOUND', id: userId});
-  const acl = user.acl();
   const permission = await acl
       .can(requester.role)
       .context({ requester: requester._id.toString(), owner: user._id.toString() })
@@ -121,7 +120,6 @@ router.put('/promote/:userId', async (req, res) => {
 
   const user = await UserModel.findById(userId);
   if (!user) return res.status(404).json({err: 'USER_NOT_FOUND', id: userId});
-  const acl = user.acl();
   const permission = await acl
       .can(requester.role)
       .execute('promote')
