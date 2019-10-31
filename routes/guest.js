@@ -1,11 +1,13 @@
 const express = require('express');
-const router = express.Router();
-const UserModel = require('../models/user');
-const moment = require('moment');
 const jwt = require('jsonwebtoken');
+const moment = require('moment');
+
+const UserModel = require('../models/user');
 const {jwtOptions} = require('../config');
 
-router.post('/', async ({body: {login, passwd}}, res) => {
+const router = express.Router();
+
+router.post('/login', async ({body: {login, passwd}}, res) => {
     const user = await UserModel.findOne({login});
     if (!user) return res.status(401).json({err: 'USER_NOT_FOUND', login});
 
@@ -21,6 +23,9 @@ router.post('/', async ({body: {login, passwd}}, res) => {
         expiresAt: jwtOptions.tokenTTL,
         expiresOn: moment().add(jwtOptions.tokenTTL).valueOf(),
     });
+});
+
+router.post('/register', async ({body}, res) => {
 });
 
 module.exports = router;

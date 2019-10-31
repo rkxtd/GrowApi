@@ -22,9 +22,9 @@ const UserSchema = new Schema({
 
 UserSchema.plugin(mongoosePaginate);
 
-// ALLOW: Anonymous:Create:User
+// ALLOW: Anonymous:Register:User
 ac.grant('anonymous')
-    .execute('create')
+    .execute('register')
     .on('user');
 
 // ALLOW: User:Read:User
@@ -66,6 +66,7 @@ ac.grant('admin')
     .execute('create').on('user')
     .execute('update').on('user')
     .execute('delete').on('user')
+    .execute('register').on('user')
     .execute('promote').on('user');
 
 // ALLOW: Admin:Read:Users

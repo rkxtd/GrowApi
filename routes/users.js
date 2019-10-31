@@ -32,8 +32,19 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', ({body}, res) => {
-  const newUser = new UserModel({...body, role: 'user'});
+router.post('/', async ({body, user}, res) => {
+  const acl = user.acl();
+  const permission = await acl
+      .can(user.role)
+      .execute('create')
+      .on('user');
+
+  if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: user._id.toString()});
+  let role = 'user';
+  if (permission.attributes === '*' || permission.attributes.includes('role')) {
+    role = body.role || role;
+  }
+  const newUser = new UserModel({...body, role});
   newUser.save(err => {
     if (err) return res.status(400).json({err: 'USER_CREATE_FAILED', msg: err});
     res.status(201).json({msg: 'USER_CREATED', id: newUser._id})

@@ -9,7 +9,7 @@ const passport = require('passport');
 const jwtStrategy = require('./auth/jwt.strategy');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const loginRouter = require('./routes/login');
+const guestRouter = require('./routes/guest');
 const app = express();
 
 app.use(bodyParser.urlencoded({
@@ -28,7 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/healthcheck', require('express-healthcheck')());
 app.use('/', indexRouter);
-app.use("/Grow/1.0.0/login", loginRouter);
+app.use("/Grow/1.0.0/guest", guestRouter);
 app.use('/Grow/1.0.0/users', passport.authenticate(
     'jwt',
     { session: false }), usersRouter);
