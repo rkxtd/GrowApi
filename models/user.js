@@ -7,11 +7,11 @@ const SALT_WORK_FACTOR = 10;
 const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     id: Schema.Types.ObjectId,
-    login: {type: String, required: true, createIndexes: { unique: true }},
+    login: {type: String, required: true, createIndexes: { unique: true }, dropDups: true},
     salt: {type: String},
     role: {type: String, enum: ['user', 'admin']},
     passwd: {type: String, required: true, update: true},
-    email: {type: mongoose.SchemaTypes.Email, required: true, createIndexes: { unique: true }, update: true},
+    email: {type: mongoose.SchemaTypes.Email, required: true, createIndexes: { unique: true }, update: true, dropDups: true},
     firstName: {type: String, required: true, update: true},
     lastName: {type: String, required: true, update: true},
     createdDate: {type: Date, default: Date.now()},
