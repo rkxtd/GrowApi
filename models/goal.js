@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 const GoalSchema = new Schema({
     id: Schema.Types.ObjectId,
     archived: { type: Boolean, default: false },
-    parent: { type: ObjectId, ref: 'Goals' },
+    author: { type: ObjectId, ref: 'Users', required: true },
+    parent: { type: ObjectId, ref: 'Goals', default: null },
     name: { type: String, required: true  },
     desc: { type: String, default: '' },
     resolved: { type: Boolean, default: false },
