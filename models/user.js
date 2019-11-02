@@ -7,15 +7,15 @@ const SALT_WORK_FACTOR = 10;
 const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     id: Schema.Types.ObjectId,
-    login: {type: String, required: true, createIndexes: { unique: true }, dropDups: true},
+    login: {type: String, required: true, createIndexes: { unique: true }, dropDups: true, register: true},
     salt: {type: String},
     role: {type: String, enum: ['user', 'admin']},
-    passwd: {type: String, required: true, update: true},
-    email: {type: mongoose.SchemaTypes.Email, required: true, createIndexes: { unique: true }, update: true, dropDups: true},
-    firstName: {type: String, required: true, update: true},
-    lastName: {type: String, required: true, update: true},
+    passwd: {type: String, required: true, update: true, register: true},
+    email: {type: mongoose.SchemaTypes.Email, required: true, createIndexes: { unique: true }, update: true, dropDups: true, register: true},
+    firstName: {type: String, required: true, update: true, register: true},
+    lastName: {type: String, required: true, update: true, register: true},
     createdDate: {type: Date, default: Date.now()},
-    profilePicture: {type: String, update: true},
+    profilePicture: {type: String, update: true, register: true},
 });
 
 UserSchema.plugin(mongoosePaginate);
