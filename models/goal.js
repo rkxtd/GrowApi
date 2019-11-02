@@ -1,9 +1,19 @@
 const mongoose = require('mongoose');
 
-// Define schema
 const Schema = mongoose.Schema;
 
-const  CriteriaSchema = new Schema({});
+const GoalSchema = new Schema({
+    id: Schema.Types.ObjectId,
+    archived: { type: Boolean, default: false },
+    parent: { type: ObjectId, ref: 'Goals' },
+    name: { type: String, required: true  },
+    desc: { type: String, default: '' },
+    resolved: { type: Boolean, default: false },
+    targetDate: {type: Date},
+    createdDate: {type: Date, default: Date.now()},
+    resolvedDate: {type: Date},
+    criteria: [ {type : mongoose.Schema.ObjectId, ref : 'Criteria'} ],
+    tags: [ {type : mongoose.Schema.ObjectId, ref : 'Tags'} ],
+});
 
-// Compile model from schema
-module.exports =  mongoose.model('CriteriaModel', CriteriaSchema );
+module.exports =  mongoose.model('Goals', GoalSchema);

@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 
-// Define schema
 const Schema = mongoose.Schema;
 
 const  TagSchema = new Schema({
-    id: String,
-    name: String
+    id: Schema.Types.ObjectId,
+    name: { type: String, required: true  },
+    desc: { type: String, default: '' }
 });
 
-// Compile model from schema
-module.exports =  mongoose.model('TagModel', TagSchema );
+module.exports =  mongoose.model('Tags', TagSchema );

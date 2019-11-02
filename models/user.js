@@ -36,9 +36,17 @@ UserSchema.methods.validatePassword = async function(passwd) {
 };
 
 UserSchema.methods.getUpdateFields = function() {
+    return this.getFieldsByParam('update');
+};
+
+UserSchema.methods.getRegisterFields = function() {
+    return this.getFieldsByParam('register');
+};
+
+UserSchema.methods.getFieldsByParam = function(fieldParam) {
     const fields = [];
-    for (let [field, { update }] of Object.entries(this.schema.obj)) {
-        if (!update) continue;
+    for (let [field, { [fieldParam]: paramExists }] of Object.entries(this.schema.obj)) {
+        if (!paramExists) continue;
         fields.push(field)
     }
     return fields;

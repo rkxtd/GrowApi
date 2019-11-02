@@ -26,12 +26,17 @@ router.post('/login', async ({body: {login, passwd}}, res) => {
 });
 
 router.post('/register', async ({body}, res) => {
-
-    // const newUser = new UserModel({...body, role});
-    // newUser.save(err => {
-    //     if (err) return res.status(400).json({err: 'USER_CREATE_FAILED', msg: err});
-    //     res.status(201).json({msg: 'USER_CREATED', id: newUser._id})
-    // });
+    const newUser = new UserModel({role: 'user'});
+    const registerFields = newUser.getRegisterFields();
+    for(let field of registerFields) {
+        newUser.set(field, body[field]);
+    }
+    try {
+        await newUser.save()
+        res.status(201).json({msg: 'USER_REGISTERED', id: newUser._id})
+    } catch (err) {
+        return res.status(400).json({err: 'USER_REGISTER_FAILED', msg: err});
+    }
 });
 
 module.exports = router;
