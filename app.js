@@ -10,6 +10,7 @@ const jwtStrategy = require('./auth/jwt.strategy');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const guestRouter = require('./routes/guest');
+const goalsRouter = require('./routes/goals');
 const app = express();
 
 app.use(bodyParser.urlencoded({
@@ -32,6 +33,9 @@ app.use("/Grow/1.0.0/guest", guestRouter);
 app.use('/Grow/1.0.0/users', passport.authenticate(
     'jwt',
     { session: false }), usersRouter);
+app.use('/Grow/1.0.0/goals', passport.authenticate(
+    'jwt',
+    { session: false }), goalsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
