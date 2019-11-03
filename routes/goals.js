@@ -25,4 +25,21 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.post('/', async ({body, user}, res) => {
+    const permission = await acl
+        .can(user.role)
+        .execute('create')
+        .on('goal');
+
+    if (!permission.granted)
+        return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: user._id.toString()});
+
+
+    const goal = new GoalModel({...body});
+    goal.save(err => {
+        if (err) return res.status(400).json({err: 'GOAL_CREATE_FAILED', msg: err});
+        res.status(201).json({msg: 'GOAL_CREATED', id: goal._id})
+    });
+});
+
 module.exports = router;
