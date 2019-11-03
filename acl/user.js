@@ -33,9 +33,21 @@ acl.grant('user')
     .execute('delete')
     .on('user');
 
-// ALLOW: User:Create:Goals
+// ALLOW: User:Create:Goal
 acl.grant('user')
     .execute('create')
+    .on('goal');
+
+// ALLOW: User:Read:Goal(Cond: Equals(Requester, Owner))
+acl.grant('user')
+    .condition({
+        Fn: 'EQUALS',
+        args: {
+            'requester': '$.owner'
+        }})
+    .execute('read')
+    .execute('update')
+    .execute('delete')
     .on('goal');
 
 // ALLOW: User:Read:Goals(Cond: Equals(Requester, Owner))
@@ -43,11 +55,9 @@ acl.grant('user')
     .condition({
         Fn: 'EQUALS',
         args: {
-            'requester': '$.author'
+            'requester': '$.owner'
         }})
     .execute('read')
-    .execute('update')
-    .execute('delete')
-    .on('goal');
+    .on('goals');
 
 module.exports = acl;

@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
-
+const { ObjectId } = Schema.Types;
 const GoalSchema = new Schema({
-    id: Schema.Types.ObjectId,
+    id: ObjectId,
     archived: { type: Boolean, default: false },
     author: { type: ObjectId, ref: 'Users', required: true },
     parent: { type: ObjectId, ref: 'Goals', default: null },
