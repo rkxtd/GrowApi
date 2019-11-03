@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
         return res.status(200).json(goals);
 
     } catch (err) {
-        return res.status(400).json({err: 'USER_FETCH_FAILED', msg: err});
+        return res.status(400).json({err: 'GOALS_FETCH_FAILED', msg: err});
     }
 });
 
