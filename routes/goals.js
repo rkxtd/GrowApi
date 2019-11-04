@@ -5,6 +5,7 @@ const GoalModel = require('../models/goal');
 const acl = require('../acl');
 
 const router = express.Router();
+const {ObjectId} = mongoose.Schema.Types;
 
 router.get('/', async (req, res) => {
     const {query: {skip:offset = 0, limit = 10}, user} = req;
@@ -28,6 +29,7 @@ router.get('/', async (req, res) => {
 router.post('/', async ({body, user}, res) => {
     const permission = await acl
         .can(user.role)
+        .context({ requester: user._id.toString(), owner: body.author })
         .execute('create')
         .on('goal');
 

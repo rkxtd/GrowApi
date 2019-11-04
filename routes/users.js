@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const UserModel = require('../models/user');
+const GoalModel = require('../models/goal');
 const acl = require('../acl');
 
 const router = express.Router();
@@ -63,10 +64,16 @@ router.delete('/:userId', async ({params: { userId }, body, user: requester}, re
       .on('user');
   if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: userId});
 
-  const { deletedCount } = await UserModel.deleteOne({ _id:userId });
-  if (!deletedCount) return res.status(400).json({err: 'USER_DELETE_FAILED', msg: err});
+  const { deletedCount: deletedGoalsCount } = await GoalModel.delete({ author: userId });
+  const { deletedCount: deletedUsersCount } = await UserModel.deleteOne({ _id: userId });
+  if (!deletedUsersCount) return res.status(400).json({err: 'USER_DELETE_FAILED', msg: err});
 
-  res.status(202).json({msg: 'USER_DELETED', id: userId})
+  res.status(202).json({
+    msg: 'USER_DELETED',
+    deleted: {
+      user: userId,
+      goalsNum: deletedGoalsCount,
+    }})
 });
 
 router.put('/:userId', async (req, res) => {

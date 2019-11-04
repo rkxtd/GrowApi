@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate');
 
 const Schema = mongoose.Schema;
 const {ObjectId} = Schema.Types;
@@ -16,5 +17,8 @@ const GoalSchema = new Schema({
     criteria: [{type: mongoose.Schema.ObjectId, ref: 'Criteria'}],
     tags: [{type: mongoose.Schema.ObjectId, ref: 'Tags'}],
 });
+
+
+GoalSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Goals', GoalSchema);

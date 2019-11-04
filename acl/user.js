@@ -33,22 +33,17 @@ acl.grant('user')
     .execute('delete')
     .on('user');
 
-// ALLOW: User:Create:Goal
-acl.grant('user')
-    .execute('create')
-    .on('goal');
-
-// ALLOW: User:Read:Goal(Cond: Equals(Requester, Owner))
+// ALLOW: User:CRUD:Goal(Cond: Equals(Requester, Owner))
 acl.grant('user')
     .condition({
         Fn: 'EQUALS',
         args: {
             'requester': '$.owner'
         }})
-    .execute('read')
-    .execute('update')
-    .execute('delete')
-    .on('goal');
+    .execute('create').on('goal')
+    .execute('read').on('goal')
+    .execute('update').on('goal')
+    .execute('delete').on('goal');
 
 // ALLOW: User:Read:Goals(Cond: Equals(Requester, Owner))
 acl.grant('user')
