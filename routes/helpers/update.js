@@ -20,9 +20,9 @@ const updateModel = async (model, permission, requestBody, res, successMsg = 'RE
     try {
         await model.save();
         if (warnings.length) {
-            return res.status(202).json({msg: successMsg, id: goalId, warnings })
+            return res.status(202).json({msg: successMsg, id: model._id, warnings })
         } else {
-            return res.status(202).json({msg: successMsg, id: goalId})
+            return res.status(202).json({msg: successMsg, id: model._id})
         }
 
     } catch (err) {
