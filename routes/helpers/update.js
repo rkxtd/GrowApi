@@ -1,3 +1,29 @@
+const mongoose = require('mongoose');
+
+const acl = require('../../acl');
+
+const defaultPutMethod = async (id, type, user, model, body, res) => {
+    const capType = type.toUpperCase();
+    const lowType = type.toLowerCase();
+
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({err: `${capType}_ID_INCORRECT`, type: lowType, id});
+    }
+
+    const record = await model.findById(id);
+    if (!record) return res.status(404).json({err: `${capType}_NOT_FOUND`, type: lowType,  id});
+
+    const permission = await acl
+        .can(user.role)
+        .context({ requester: user._id.toString(), owner: record.author.toString() })
+        .execute('update')
+        .on(lowType);
+
+    if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', type: lowType,  id});
+
+    return await updateModel(record, permission, body, res, `${capType}_SAVED`, `${capType}_UPDATE_FAILED`);
+};
+
 const updateModel = async (model, permission, requestBody, res, successMsg = 'RECORD_SAVED', errorMsg = 'RECORD_UPDATE_FAILED') => {
     const allUpdateFields = model.getUpdateFields();
 
@@ -32,4 +58,5 @@ const updateModel = async (model, permission, requestBody, res, successMsg = 'RE
 
 module.exports = {
     updateModel,
+    defaultPutMethod,
 };

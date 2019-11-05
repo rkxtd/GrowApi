@@ -20,7 +20,19 @@ acl.grant('admin')
     .execute('update').on('goal')
     .execute('delete').on('goal');
 
+// ALLOW: Admin:Read:Goals
 acl.grant('admin')
     .execute('read').on('goals');
+
+// ALLOW: Admin:CRUD:Criteria
+acl.grant('admin')
+    .execute('read').on('criteria')
+    .execute('create').on('criteria')
+    .execute('update').on('criteria')
+    .execute('delete').on('criteria');
+
+// ALLOW: Admin:Read:Criterias
+acl.grant('admin')
+    .execute('read').on('criterias');
 
 module.exports = acl;

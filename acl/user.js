@@ -42,7 +42,7 @@ acl.grant('user')
         }})
     .execute('create').on('goal')
     .execute('read').on('goal')
-    .execute('update').on('goal')
+    .execute('update').on('goal', ['archived', 'goals', 'criterias', 'tags', 'name', 'desc', 'resolved', 'targetDate', 'resolvedDate', 'order'])
     .execute('delete').on('goal');
 
 // ALLOW: User:Read:Goals(Cond: Equals(Requester, Owner))
@@ -64,7 +64,7 @@ acl.grant('user')
         }})
     .execute('create').on('criteria')
     .execute('read').on('criteria')
-    .execute('update').on('criteria')
+    .execute('update').on('criteria', ['name', 'desc', 'primary', 'resolved', 'targetDate', 'resolvedDate', 'order'])
     .execute('delete').on('criteria');
 
 // ALLOW: User:Read:Criteria(Cond: Equals(Requester, Owner))

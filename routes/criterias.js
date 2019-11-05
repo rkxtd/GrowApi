@@ -5,7 +5,7 @@ const GoalModel = require('../models/goal');
 const CriteriaModel = require('../models/criteria');
 
 const acl = require('../acl');
-const { updateModel } = require('./helpers/update');
+const { defaultPutMethod } = require('./helpers/update');
 
 const router = express.Router();
 
@@ -81,23 +81,7 @@ router.post('/', async ({body, user}, res) => {
 
 router.put('/:criteriaId', async (req, res) => {
     const { params: { criteriaId }, body, user } = req;
-    if(!mongoose.Types.ObjectId.isValid(criteriaId)) {
-        return res.status(400).json({err: 'CRITERIA_ID_INCORRECT', id: criteriaId});
-    }
-
-    const criteria = await CriteriaModel.findById(criteriaId);
-    if (!criteria) return res.status(404).json({err: 'CRITERIA_NOT_FOUND', id: criteriaId});
-
-    const permission = await acl
-        .can(user.role)
-        .context({ requester: user._id.toString(), owner: criteria.author.toString() })
-        .execute('update')
-        .on('criteria');
-
-    if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: criteriaId});
-
-    return await updateModel(criteria, permission, body, res, 'CRITERIA_SAVED', 'CRITERIA_UPDATE_FAILED');
+    return await defaultPutMethod(criteriaId, 'criteria', user, CriteriaModel, body, res);
 });
-
 
 module.exports = router;
