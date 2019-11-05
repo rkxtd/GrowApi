@@ -55,4 +55,26 @@ acl.grant('user')
     .execute('read')
     .on('goals');
 
+// ALLOW: User:CRUD:Criteria(Cond: Equals(Requester, Owner))
+acl.grant('user')
+    .condition({
+        Fn: 'EQUALS',
+        args: {
+            'requester': '$.owner'
+        }})
+    .execute('create').on('criteria')
+    .execute('read').on('criteria')
+    .execute('update').on('criteria')
+    .execute('delete').on('criteria');
+
+// ALLOW: User:Read:Criteria(Cond: Equals(Requester, Owner))
+acl.grant('user')
+    .condition({
+        Fn: 'EQUALS',
+        args: {
+            'requester': '$.owner'
+        }})
+    .execute('read')
+    .on('criterias');
+
 module.exports = acl;

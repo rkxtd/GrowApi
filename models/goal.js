@@ -7,15 +7,16 @@ const GoalSchema = new Schema({
     id: ObjectId,
     archived: {type: Boolean, default: false, update: true},
     author: {type: ObjectId, ref: 'Users', required: true, update: true},
-    parent: {type: ObjectId, ref: 'Goals', default: null, update: true},
+    goals: [{type: ObjectId, ref: 'Goals'}],
+    criterias: [{type: ObjectId, ref: 'Criteria'}],
+    tags: [{type: ObjectId, ref: 'Tag'}],
     name: {type: String, required: true, update: true},
     desc: {type: String, default: null, update: true},
     resolved: {type: Boolean, default: false, update: true},
     targetDate: {type: Date, default: null, update: true},
     createdDate: {type: Date, default: Date.now()},
     resolvedDate: {type: Date, default: null, update: true},
-    criteria: [{type: mongoose.Schema.ObjectId, ref: 'Criteria'}],
-    tags: [{type: mongoose.Schema.ObjectId, ref: 'Tags'}],
+    order: {type: Number, default: 0},
 });
 
 
