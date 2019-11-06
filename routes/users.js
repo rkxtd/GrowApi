@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 
 const UserModel = require('../models/user');
 const GoalModel = require('../models/goal');
+const CriteriaModel = require('../models/criteria');
+
 const { updateModel } = require('./helpers/update');
 const acl = require('../acl');
 
@@ -68,6 +70,8 @@ router.delete('/:userId', async ({params: { userId }, body, user: requester}, re
       .execute('delete')
       .on('user');
   if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: userId});
+
+  const { deletedCount: deletedCriteriasCount } = await CriteriaModel.deleteMany({ author: userId });
   const { deletedCount: deletedGoalsCount } = await GoalModel.deleteMany({ author: userId });
   const { deletedCount: deletedUsersCount } = await UserModel.deleteOne({ _id: userId });
   if (!deletedUsersCount) return res.status(400).json({
@@ -81,6 +85,7 @@ router.delete('/:userId', async ({params: { userId }, body, user: requester}, re
     deleted: {
       user: userId,
       goalsCount: deletedGoalsCount,
+      criteriasCount: deletedCriteriasCount,
     }})
 });
 
