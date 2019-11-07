@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const GoalModel = require('../models/goal');
 const CriteriaModel = require('../models/criteria');
 const acl = require('../acl');
-const { defaultPutMethod } = require('./helpers/update');
+const { defaultPutMethod, defaultDeleteMethod } = require('./helpers/update');
 
 const router = express.Router();
 
@@ -153,28 +153,7 @@ router.put('/removeCriteria/:goalId/:criteriaId', async (req, res) => {
 });
 
 router.delete('/:goalId', async ({params: { goalId }, body, user}, res) => {
-    if(!mongoose.Types.ObjectId.isValid(goalId)) {
-        return res.status(400).json({err: 'GOAL_ID_INCORRECT', id: goalId});
-    }
-
-    const goal = await GoalModel.findOne({ _id: goalId });
-    if (!goal) return res.status(404).json({err: 'GOAL_NOT_FOUND', id: goalId});
-
-    const permission = await acl
-        .can(user.role)
-        .context({ requester: user._id.toString(), owner: goal.author.toString() })
-        .execute('delete')
-        .on('goal');
-    if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: user._id});
-
-    const { deletedCount: deletedGoalsCount } = await GoalModel.deleteOne({ _id: goalId });
-    if (!deletedGoalsCount) return res.status(400).json({
-        err: 'GOAL_DELETE_FAILED',
-        msg: 'Mongo can\'t delete goal',
-        id: goalId
-    });
-
-    res.status(202).json({ msg: 'GOAL_DELETED', id: goalId })
+    return await defaultDeleteMethod(goalId, GoalModel, 'goal', user, res);
 });
 
 module.exports = router;
