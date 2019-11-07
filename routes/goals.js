@@ -167,13 +167,11 @@ router.delete('/:goalId', async ({params: { goalId }, body, user}, res) => {
         .on('goal');
     if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: user._id});
 
-    const { deletedCount: deletedCriteriasCount } = await CriteriaModel.deleteMany({ _id: { $in: goal.criterias }});
     const { deletedCount: deletedGoalsCount } = await GoalModel.deleteOne({ _id: goalId });
     if (!deletedGoalsCount) return res.status(400).json({
         err: 'GOAL_DELETE_FAILED',
         msg: 'Mongo can\'t delete goal',
-        id: goalId,
-        criteriasCount: deletedCriteriasCount,
+        id: goalId
     });
 
     res.status(202).json({ msg: 'GOAL_DELETED', id: goalId })

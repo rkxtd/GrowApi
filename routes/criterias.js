@@ -84,4 +84,35 @@ router.put('/:criteriaId', async (req, res) => {
     return await defaultPutMethod(criteriaId, 'criteria', user, CriteriaModel, body, res);
 });
 
+router.delete('/:criteriaId', async ({params: { criteriaId }, body, user}, res) => {
+    return await defaultDeleteMethod();
+});
+
+const defaultDeleteMethod = async (id, model, entityName, user, res) => {
+    const lModel = entityName.toLowerCase();
+    const uModel = entityName.toUpperCase();
+
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({err: `${uModel}_ID_INCORRECT`, id});
+    }
+
+    const record = await model.findOne({ _id: id });
+    if (!record) return res.status(404).json({err: `${uModel}_NOT_FOUND`, id});
+
+    const permission = await acl
+        .can(user.role)
+        .context({ requester: user._id.toString(), owner: record.author.toString() })
+        .execute('delete')
+        .on(lModel);
+    if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', userId: user._id, recordId: record._id, action: 'delete'});
+
+    const { deletedCount } = await model.deleteOne({ _id: id });
+    if (!deletedCount) return res.status(400).json({
+        err: `${uModel}_DELETE_FAILED`,
+        msg: `Mongo can\'t delete ${lModel}`,
+        id,
+    });
+
+    return res.status(202).json({ msg: `${uModel}_DELETED`, id })
+};
 module.exports = router;
