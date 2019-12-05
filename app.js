@@ -11,7 +11,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const guestRouter = require('./routes/guest');
 const goalsRouter = require('./routes/goals');
-const criteriasRouter = require('./routes/criterias');
+const criteriaRouter = require('./routes/criteria');
 const app = express();
 
 app.use(bodyParser.urlencoded({
@@ -37,9 +37,9 @@ app.use('/Grow/1.0.0/users', passport.authenticate(
 app.use('/Grow/1.0.0/goals', passport.authenticate(
     'jwt',
     { session: false }), goalsRouter);
-app.use('/Grow/1.0.0/criterias', passport.authenticate(
+app.use('/Grow/1.0.0/criteria', passport.authenticate(
     'jwt',
-    { session: false }), criteriasRouter);
+    { session: false }), criteriaRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

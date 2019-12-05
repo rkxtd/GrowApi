@@ -71,7 +71,7 @@ router.delete('/:userId', async ({params: { userId }, body, user: requester}, re
       .on('user');
   if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: userId});
 
-  const { deletedCount: deletedCriteriasCount } = await CriteriaModel.deleteMany({ author: userId });
+  const { deletedCount: deletedCriteriaCount } = await CriteriaModel.deleteMany({ author: userId });
   const { deletedCount: deletedGoalsCount } = await GoalModel.deleteMany({ author: userId });
   const { deletedCount: deletedUsersCount } = await UserModel.deleteOne({ _id: userId });
   if (!deletedUsersCount) return res.status(400).json({
@@ -85,7 +85,7 @@ router.delete('/:userId', async ({params: { userId }, body, user: requester}, re
     deleted: {
       user: userId,
       goalsCount: deletedGoalsCount,
-      criteriasCount: deletedCriteriasCount,
+      criteriaCount: deletedCriteriasCount,
     }})
 });
 

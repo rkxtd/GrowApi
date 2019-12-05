@@ -31,8 +31,8 @@ acl.grant('admin')
     .execute('update').on('criteria')
     .execute('delete').on('criteria');
 
-// ALLOW: Admin:Read:Criterias
+// ALLOW: Admin:Read:Criteria
 acl.grant('admin')
-    .execute('read').on('criterias');
+    .execute('read').on('criteria');
 
 module.exports = acl;

@@ -335,7 +335,7 @@
 										}
 									],
 									"cookie": [],
-									"body": "[\n {\n  \"archived\": \"<boolean>\",\n  \"parentId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"resolved\": \"<boolean>\",\n  \"targetDate\": \"<dateTime>\",\n  \"resolvedDate\": \"<dateTime>\",\n  \"id\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"criterias\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   }\n  ],\n  \"tags\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   }\n  ]\n },\n {\n  \"archived\": \"<boolean>\",\n  \"parentId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"resolved\": \"<boolean>\",\n  \"targetDate\": \"<dateTime>\",\n  \"resolvedDate\": \"<dateTime>\",\n  \"id\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"criterias\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   }\n  ],\n  \"tags\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   }\n  ]\n }\n]"
+									"body": "[\n {\n  \"archived\": \"<boolean>\",\n  \"parentId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"resolved\": \"<boolean>\",\n  \"targetDate\": \"<dateTime>\",\n  \"resolvedDate\": \"<dateTime>\",\n  \"id\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"criteria\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   }\n  ],\n  \"tags\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   }\n  ]\n },\n {\n  \"archived\": \"<boolean>\",\n  \"parentId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"resolved\": \"<boolean>\",\n  \"targetDate\": \"<dateTime>\",\n  \"resolvedDate\": \"<dateTime>\",\n  \"id\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"criterias\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   }\n  ],\n  \"tags\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   }\n  ]\n }\n]"
 								},
 								{
 									"name": "bad input parameter",
@@ -521,7 +521,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n {\n  \"archived\": \"<boolean>\",\n  \"parentId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"resolved\": \"<boolean>\",\n  \"targetDate\": \"<dateTime>\",\n  \"resolvedDate\": \"<dateTime>\",\n  \"id\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"criterias\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   }\n  ],\n  \"tags\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   }\n  ]\n },\n {\n  \"archived\": \"<boolean>\",\n  \"parentId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"resolved\": \"<boolean>\",\n  \"targetDate\": \"<dateTime>\",\n  \"resolvedDate\": \"<dateTime>\",\n  \"id\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"criterias\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   }\n  ],\n  \"tags\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   }\n  ]\n }\n]"
+							"body": "[\n {\n  \"archived\": \"<boolean>\",\n  \"parentId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"resolved\": \"<boolean>\",\n  \"targetDate\": \"<dateTime>\",\n  \"resolvedDate\": \"<dateTime>\",\n  \"id\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"criteria\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   }\n  ],\n  \"tags\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   }\n  ]\n },\n {\n  \"archived\": \"<boolean>\",\n  \"parentId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"resolved\": \"<boolean>\",\n  \"targetDate\": \"<dateTime>\",\n  \"resolvedDate\": \"<dateTime>\",\n  \"id\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"criterias\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   }\n  ],\n  \"tags\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   }\n  ]\n }\n]"
 						},
 						{
 							"name": "bad input parameter",
@@ -612,7 +612,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"archived\": \"<boolean>\",\n    \"parentId\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"desc\": \"<string>\",\n    \"resolved\": \"<boolean>\",\n    \"targetDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\",\n    \"criterias\": [\n        {\n            \"name\": \"<string>\",\n            \"goalId\": \"<uuid>\",\n            \"desc\": \"<string>\",\n            \"primary\": \"<boolean>\",\n            \"resolved\": \"<boolean>\",\n            \"alertDate\": \"<dateTime>\",\n            \"targetDate\": \"<dateTime>\",\n            \"createdDate\": \"<dateTime>\",\n            \"resolvedDate\": \"<dateTime>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"goalId\": \"<uuid>\",\n            \"desc\": \"<string>\",\n            \"primary\": \"<boolean>\",\n            \"resolved\": \"<boolean>\",\n            \"alertDate\": \"<dateTime>\",\n            \"targetDate\": \"<dateTime>\",\n            \"createdDate\": \"<dateTime>\",\n            \"resolvedDate\": \"<dateTime>\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"name\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\"\n        }\n    ]\n}"
+									"raw": "{\n    \"archived\": \"<boolean>\",\n    \"parentId\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"desc\": \"<string>\",\n    \"resolved\": \"<boolean>\",\n    \"targetDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\",\n    \"criteria\": [\n        {\n            \"name\": \"<string>\",\n            \"goalId\": \"<uuid>\",\n            \"desc\": \"<string>\",\n            \"primary\": \"<boolean>\",\n            \"resolved\": \"<boolean>\",\n            \"alertDate\": \"<dateTime>\",\n            \"targetDate\": \"<dateTime>\",\n            \"createdDate\": \"<dateTime>\",\n            \"resolvedDate\": \"<dateTime>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"goalId\": \"<uuid>\",\n            \"desc\": \"<string>\",\n            \"primary\": \"<boolean>\",\n            \"resolved\": \"<boolean>\",\n            \"alertDate\": \"<dateTime>\",\n            \"targetDate\": \"<dateTime>\",\n            \"createdDate\": \"<dateTime>\",\n            \"resolvedDate\": \"<dateTime>\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"name\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\"\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/goals",
@@ -648,7 +648,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"archived\": \"<boolean>\",\n    \"parentId\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"desc\": \"<string>\",\n    \"resolved\": \"<boolean>\",\n    \"targetDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\",\n    \"criterias\": [\n        {\n            \"name\": \"<string>\",\n            \"goalId\": \"<uuid>\",\n            \"desc\": \"<string>\",\n            \"primary\": \"<boolean>\",\n            \"resolved\": \"<boolean>\",\n            \"alertDate\": \"<dateTime>\",\n            \"targetDate\": \"<dateTime>\",\n            \"createdDate\": \"<dateTime>\",\n            \"resolvedDate\": \"<dateTime>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"goalId\": \"<uuid>\",\n            \"desc\": \"<string>\",\n            \"primary\": \"<boolean>\",\n            \"resolved\": \"<boolean>\",\n            \"alertDate\": \"<dateTime>\",\n            \"targetDate\": \"<dateTime>\",\n            \"createdDate\": \"<dateTime>\",\n            \"resolvedDate\": \"<dateTime>\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"name\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\"\n        }\n    ]\n}"
+									"raw": "{\n    \"archived\": \"<boolean>\",\n    \"parentId\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"desc\": \"<string>\",\n    \"resolved\": \"<boolean>\",\n    \"targetDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\",\n    \"criteria\": [\n        {\n            \"name\": \"<string>\",\n            \"goalId\": \"<uuid>\",\n            \"desc\": \"<string>\",\n            \"primary\": \"<boolean>\",\n            \"resolved\": \"<boolean>\",\n            \"alertDate\": \"<dateTime>\",\n            \"targetDate\": \"<dateTime>\",\n            \"createdDate\": \"<dateTime>\",\n            \"resolvedDate\": \"<dateTime>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"goalId\": \"<uuid>\",\n            \"desc\": \"<string>\",\n            \"primary\": \"<boolean>\",\n            \"resolved\": \"<boolean>\",\n            \"alertDate\": \"<dateTime>\",\n            \"targetDate\": \"<dateTime>\",\n            \"createdDate\": \"<dateTime>\",\n            \"resolvedDate\": \"<dateTime>\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"name\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\"\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/goals",
@@ -684,7 +684,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"archived\": \"<boolean>\",\n    \"parentId\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"desc\": \"<string>\",\n    \"resolved\": \"<boolean>\",\n    \"targetDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\",\n    \"criterias\": [\n        {\n            \"name\": \"<string>\",\n            \"goalId\": \"<uuid>\",\n            \"desc\": \"<string>\",\n            \"primary\": \"<boolean>\",\n            \"resolved\": \"<boolean>\",\n            \"alertDate\": \"<dateTime>\",\n            \"targetDate\": \"<dateTime>\",\n            \"createdDate\": \"<dateTime>\",\n            \"resolvedDate\": \"<dateTime>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"goalId\": \"<uuid>\",\n            \"desc\": \"<string>\",\n            \"primary\": \"<boolean>\",\n            \"resolved\": \"<boolean>\",\n            \"alertDate\": \"<dateTime>\",\n            \"targetDate\": \"<dateTime>\",\n            \"createdDate\": \"<dateTime>\",\n            \"resolvedDate\": \"<dateTime>\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"name\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\"\n        }\n    ]\n}"
+									"raw": "{\n    \"archived\": \"<boolean>\",\n    \"parentId\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"desc\": \"<string>\",\n    \"resolved\": \"<boolean>\",\n    \"targetDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\",\n    \"criteria\": [\n        {\n            \"name\": \"<string>\",\n            \"goalId\": \"<uuid>\",\n            \"desc\": \"<string>\",\n            \"primary\": \"<boolean>\",\n            \"resolved\": \"<boolean>\",\n            \"alertDate\": \"<dateTime>\",\n            \"targetDate\": \"<dateTime>\",\n            \"createdDate\": \"<dateTime>\",\n            \"resolvedDate\": \"<dateTime>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"goalId\": \"<uuid>\",\n            \"desc\": \"<string>\",\n            \"primary\": \"<boolean>\",\n            \"resolved\": \"<boolean>\",\n            \"alertDate\": \"<dateTime>\",\n            \"targetDate\": \"<dateTime>\",\n            \"createdDate\": \"<dateTime>\",\n            \"resolvedDate\": \"<dateTime>\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"name\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\"\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/goals",
@@ -714,10 +714,10 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "criterias",
+			"name": "criteria",
 			"item": [
 				{
-					"name": "Searches criterias",
+					"name": "Searches criteria",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -731,12 +731,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/criterias",
+							"raw": "{{baseUrl}}/criteria",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"criterias"
+								"criteria"
 							]
 						}
 					},
@@ -780,7 +780,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n {\n  \"archived\": \"<boolean>\",\n  \"parentId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"resolved\": \"<boolean>\",\n  \"targetDate\": \"<dateTime>\",\n  \"resolvedDate\": \"<dateTime>\",\n  \"id\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"criterias\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   }\n  ],\n  \"tags\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   }\n  ]\n },\n {\n  \"archived\": \"<boolean>\",\n  \"parentId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"resolved\": \"<boolean>\",\n  \"targetDate\": \"<dateTime>\",\n  \"resolvedDate\": \"<dateTime>\",\n  \"id\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"criterias\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   }\n  ],\n  \"tags\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   }\n  ]\n }\n]"
+							"body": "[\n {\n  \"archived\": \"<boolean>\",\n  \"parentId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"resolved\": \"<boolean>\",\n  \"targetDate\": \"<dateTime>\",\n  \"resolvedDate\": \"<dateTime>\",\n  \"id\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"criteria\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   }\n  ],\n  \"tags\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   }\n  ]\n },\n {\n  \"archived\": \"<boolean>\",\n  \"parentId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"resolved\": \"<boolean>\",\n  \"targetDate\": \"<dateTime>\",\n  \"resolvedDate\": \"<dateTime>\",\n  \"id\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"criterias\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n   }\n  ],\n  \"tags\": [\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   },\n   {\n    \"name\": \"<string>\",\n    \"id\": \"<uuid>\"\n   }\n  ]\n }\n]"
 						},
 						{
 							"name": "bad input parameter",
@@ -843,15 +843,15 @@
 							"raw": "{\n    \"name\": \"<string>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/criterias",
+							"raw": "{{baseUrl}}/criteria",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"criterias"
+								"criteria"
 							]
 						},
-						"description": "Goal could include multiple success criteria, which will evaluate goal's success. Goal can not be closed with unfinished primary success criteria. Optional success criterias could be not finished."
+						"description": "Goal could include multiple success criteria, which will evaluate goal's success. Goal can not be closed with unfinished primary success criteria. Optional success criteria could be not finished."
 					},
 					"response": [
 						{
@@ -869,12 +869,12 @@
 									"raw": "{\n    \"name\": \"<string>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n}"
 								},
 								"url": {
-									"raw": "{{baseUrl}}/criterias",
+									"raw": "{{baseUrl}}/criteria",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"criterias"
+										"criteria"
 									]
 								}
 							},
@@ -905,12 +905,12 @@
 									"raw": "{\n    \"name\": \"<string>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n}"
 								},
 								"url": {
-									"raw": "{{baseUrl}}/criterias",
+									"raw": "{{baseUrl}}/criteria",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"criterias"
+										"criteria"
 									]
 								}
 							},
@@ -941,12 +941,12 @@
 									"raw": "{\n    \"name\": \"<string>\",\n    \"goalId\": \"<uuid>\",\n    \"desc\": \"<string>\",\n    \"primary\": \"<boolean>\",\n    \"resolved\": \"<boolean>\",\n    \"alertDate\": \"<dateTime>\",\n    \"targetDate\": \"<dateTime>\",\n    \"createdDate\": \"<dateTime>\",\n    \"resolvedDate\": \"<dateTime>\"\n}"
 								},
 								"url": {
-									"raw": "{{baseUrl}}/criterias",
+									"raw": "{{baseUrl}}/criteria",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"criterias"
+										"criteria"
 									]
 								}
 							},

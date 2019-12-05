@@ -50,7 +50,7 @@ router.get('/:goalId', async (req, res) => {
 
     if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: user._id});
     await goal
-        .populate('criterias')
+        .populate('criteria')
         .populate('goals')
         .execPopulate();
     return res.status(200).json(goal);
@@ -104,8 +104,8 @@ router.put('/addCriteria/:goalId/:criteriaId', async (req, res) => {
 
     if (!criteriaPermission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', userId: user._id, goalId, criteriaId});
 
-    if (goal.get('criterias').find(record => record._id.toString() === criteria._id.toString())) return res.status(409).json({err: 'CRITERIA_ALREADY_ASSIGNED_TO_GOAL', goalId, criteriaId });
-    goal.criterias.push(criteria);
+    if (goal.get('criteria').find(record => record._id.toString() === criteria._id.toString())) return res.status(409).json({err: 'CRITERIA_ALREADY_ASSIGNED_TO_GOAL', goalId, criteriaId });
+    goal.criteria.push(criteria);
 
     try {
         await goal.save();
@@ -140,9 +140,9 @@ router.put('/removeCriteria/:goalId/:criteriaId', async (req, res) => {
 
     if (!criteriaPermission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', userId: user._id, goalId, criteriaId});
 
-    if (!goal.get('criterias').find(record => record._id.toString() === criteria._id.toString())) return res.status(404).json({err: 'CRITERIA_NOT_ASSIGNED_TO_GOAL', goalId, criteriaId });
+    if (!goal.get('criteria').find(record => record._id.toString() === criteria._id.toString())) return res.status(404).json({err: 'CRITERIA_NOT_ASSIGNED_TO_GOAL', goalId, criteriaId });
 
-    goal.criterias = goal.criterias.filter(record => record._id.toString() !== criteria._id.toString());
+    goal.criteria = goal.criteria.filter(record => record._id.toString() !== criteria._id.toString());
 
     try {
         await goal.save();

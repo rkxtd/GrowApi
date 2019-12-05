@@ -8,7 +8,7 @@ const GoalSchema = new Schema({
     archived: {type: Boolean, default: false, update: true},
     author: {type: ObjectId, ref: 'Users', required: true, update: true},
     goals: [{type: ObjectId, ref: 'Goals'}],
-    criterias: [{type: ObjectId, ref: 'Criteria'}],
+    criteria: [{type: ObjectId, ref: 'Criteria'}],
     tags: [{type: ObjectId, ref: 'Tag'}],
     name: {type: String, required: true, update: true},
     desc: {type: String, default: null, update: true},

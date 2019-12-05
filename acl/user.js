@@ -42,7 +42,7 @@ acl.grant('user')
         }})
     .execute('create').on('goal')
     .execute('read').on('goal')
-    .execute('update').on('goal', ['archived', 'goals', 'criterias', 'tags', 'name', 'desc', 'resolved', 'targetDate', 'resolvedDate', 'order'])
+    .execute('update').on('goal', ['archived', 'goals', 'criteria', 'tags', 'name', 'desc', 'resolved', 'targetDate', 'resolvedDate', 'order'])
     .execute('delete').on('goal');
 
 // ALLOW: User:Read:Goals(Cond: Equals(Requester, Owner))
@@ -75,6 +75,6 @@ acl.grant('user')
             'requester': '$.owner'
         }})
     .execute('read')
-    .on('criterias');
+    .on('criteria');
 
 module.exports = acl;

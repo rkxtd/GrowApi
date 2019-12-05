@@ -27,4 +27,4 @@ CriteriaSchema.methods.getUpdateFields = function() {
     return fields;
 };
 
-module.exports =  mongoose.model('Criteria', CriteriaSchema, 'criterias');
+module.exports =  mongoose.model('Criteria', CriteriaSchema, 'criteria');

@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
         .can(user.role)
         .context({ requester: user._id.toString(), owner: user._id.toString() })
         .execute('read')
-        .on('criterias');
+        .on('criteria');
 
     if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: user._id});
 
@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
         return res.status(200).json(goals);
 
     } catch (err) {
-        return res.status(400).json({err: 'CRITERIAS_FETCH_FAILED', msg: err});
+        return res.status(400).json({err: 'CRITERIA_FETCH_FAILED', msg: err});
     }
 });
 
@@ -45,7 +45,7 @@ router.get('/:goalId', async (req, res) => {
         .can(user.role)
         .context({ requester: user._id.toString(), owner: goal.author.toString() })
         .execute('read')
-        .on('criterias');
+        .on('criteria');
 
     if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: user._id});
 
@@ -60,6 +60,7 @@ router.get('/:goalId', async (req, res) => {
 });
 
 router.post('/', async ({body, user}, res) => {
+
     const permission = await acl
         .can(user.role)
         .context({ requester: user._id.toString(), owner: body.author })
