@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
         .execute('read')
         .on('criteria');
 
-    if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: user._id});
+    if (!permission.granted) return res.status(403).json({message: 'USER_NOT_AUTHORIZED', data: { id: user._id }});
 
     try {
         const goals = await CriteriaModel.paginate({author: user._id}, {
@@ -35,11 +35,11 @@ router.get('/', async (req, res) => {
 router.get('/:goalId', async (req, res) => {
     const { params: { goalId }, user } = req;
     if(!mongoose.Types.ObjectId.isValid(goalId)) {
-        return res.status(400).json({err: 'GOAL_ID_INCORRECT', id: goalId});
+        return res.status(400).json({message: 'GOAL_ID_INCORRECT', data: {id: goalId}});
     }
 
     const goal = await GoalModel.findOne({ _id: goalId });
-    if (!goal) return res.status(404).json({err: 'GOAL_NOT_FOUND', id: goalId});
+    if (!goal) return res.status(404).json({message: 'GOAL_NOT_FOUND', data: {id: goalId}});
 
     const permission = await acl
         .can(user.role)
@@ -47,7 +47,7 @@ router.get('/:goalId', async (req, res) => {
         .execute('read')
         .on('criteria');
 
-    if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: user._id});
+    if (!permission.granted) return res.status(403).json({message: 'USER_NOT_AUTHORIZED', data: { id: user._id}});
 
     try {
         const goals = await CriteriaModel.find({goal: goal._id}).sort({order: 'asc'});
@@ -55,7 +55,7 @@ router.get('/:goalId', async (req, res) => {
         return res.status(200).json(goals);
 
     } catch (err) {
-        return res.status(400).json({err: 'GOALS_FETCH_FAILED', msg: err});
+        return res.status(400).json({message: 'GOALS_FETCH_FAILED', data: {details: err}});
     }
 });
 
@@ -68,15 +68,15 @@ router.post('/', async ({body, user}, res) => {
         .on('criteria');
 
     if (!permission.granted)
-        return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: user._id.toString()});
+        return res.status(403).json({message: 'USER_NOT_AUTHORIZED', data: {id: user._id.toString()}});
 
 
     const criteria = new CriteriaModel({...body});
     try {
         await criteria.save();
-        return res.status(201).json({msg: 'CRITERIA_CREATED', id: criteria._id});
+        return res.status(201).json({message: 'CRITERIA_CREATED', data: {id: criteria._id}});
     } catch (err) {
-        return res.status(400).json({err: 'CRITERIA_CREATE_FAILED', msg: err});
+        return res.status(400).json({message: 'CRITERIA_CREATE_FAILED', data: {details: err}});
     }
 });
 

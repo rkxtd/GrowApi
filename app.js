@@ -6,6 +6,7 @@ const logger = require('morgan');
 const db = require('./db');
 const bodyParser = require("body-parser");
 const passport = require('passport');
+const cors = require('cors');
 const jwtStrategy = require('./auth/jwt.strategy');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -17,6 +18,11 @@ const app = express();
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+if (process.env.ENV == 'dev') {
+  console.info('CORS Enabled');
+  app.use(cors())
+}
 
 app.use(bodyParser.json());
 app.set('views', path.join(__dirname, 'views'));

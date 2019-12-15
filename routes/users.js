@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
       .can(user.role)
       .execute('read')
       .on('users');
-  if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: user._id});
+  if (!permission.granted) return res.status(403).json({message: 'USER_NOT_AUTHORIZED', data: {id: user._id}});
 
   try {
     const users = await UserModel.paginate({}, {offset: parseInt(offset), limit: parseInt(limit)});
@@ -34,7 +34,7 @@ router.get('/', async (req, res) => {
     }
 
   } catch (err) {
-    return res.status(400).json({err: 'USER_FETCH_FAILED', msg: err});
+    return res.status(400).json({message: 'USER_FETCH_FAILED', data: {details: err}});
   }
 });
 
@@ -44,45 +44,47 @@ router.post('/', async ({body, user}, res) => {
       .execute('create')
       .on('user');
 
-  if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: user._id.toString()});
+  if (!permission.granted) return res.status(403).json({message: 'USER_NOT_AUTHORIZED', data: {id: user._id.toString()}});
   let role = 'user';
   if (permission.attributes === '*' || permission.attributes.includes('role')) {
     role = body.role || role;
   }
   const newUser = new UserModel({...body, role});
   newUser.save(err => {
-    if (err) return res.status(400).json({err: 'USER_CREATE_FAILED', msg: err});
-    res.status(201).json({msg: 'USER_CREATED', id: newUser._id})
+    if (err) return res.status(400).json({message: 'USER_CREATE_FAILED', data: {details: err}});
+    res.status(201).json({message: 'USER_CREATED', data: {id: newUser._id}})
   });
 });
 
 router.delete('/:userId', async ({params: { userId }, body, user: requester}, res) => {
   if(!mongoose.Types.ObjectId.isValid(userId)) {
-    return res.status(400).json({err: 'USER_ID_INCORRECT', id: userId});
+    return res.status(400).json({message: 'USER_ID_INCORRECT', data: {id: userId}});
   }
 
   const user = await UserModel.findOne({ _id: userId });
-  if (!user) return res.status(404).json({err: 'USER_NOT_FOUND', id: userId});
+  if (!user) return res.status(404).json({message: 'USER_NOT_FOUND', data: {id: userId}});
 
   const permission = await acl
       .can(requester.role)
       .context({ requester: requester._id.toString(), owner: user._id.toString() })
       .execute('delete')
       .on('user');
-  if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: userId});
+  if (!permission.granted) return res.status(403).json({message: 'USER_NOT_AUTHORIZED', data: {id: userId}});
 
   const { deletedCount: deletedCriteriaCount } = await CriteriaModel.deleteMany({ author: userId });
   const { deletedCount: deletedGoalsCount } = await GoalModel.deleteMany({ author: userId });
   const { deletedCount: deletedUsersCount } = await UserModel.deleteOne({ _id: userId });
   if (!deletedUsersCount) return res.status(400).json({
-    err: 'USER_DELETE_FAILED',
-    msg: 'Mongo can\'t delete user',
-    id: userId
+    message: 'USER_DELETE_FAILED',
+    data: {
+      details: 'Mongo can\'t delete user',
+      id: userId,
+    }
   });
 
   res.status(202).json({
-    msg: 'USER_DELETED',
-    deleted: {
+    message: 'USER_DELETED',
+    data: {
       user: userId,
       goalsCount: deletedGoalsCount,
       criteriaCount: deletedCriteriasCount,
@@ -92,41 +94,41 @@ router.delete('/:userId', async ({params: { userId }, body, user: requester}, re
 router.put('/:userId', async (req, res) => {
   const { params: { userId }, body, user: requester } = req;
   if(!mongoose.Types.ObjectId.isValid(userId)) {
-    return res.status(400).json({err: 'USER_ID_INCORRECT', id: userId});
+    return res.status(400).json({message: 'USER_ID_INCORRECT', data: {id: userId}});
   }
 
   const user = await UserModel.findById(userId);
-  if (!user) return res.status(404).json({err: 'USER_NOT_FOUND', id: userId});
+  if (!user) return res.status(404).json({message: 'USER_NOT_FOUND', data: {id: userId}});
   const permission = await acl
       .can(requester.role)
       .context({ requester: requester._id.toString(), owner: user._id.toString() })
       .execute('update')
       .on('user');
-  if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: userId});
+  if (!permission.granted) return res.status(403).json({message: 'USER_NOT_AUTHORIZED', data: {id: userId}});
 
   return await updateModel(user, permission, body, res, 'USER_SAVED', 'USER_UPDATE_FAILED');
 });
 
 router.put('/promote/:userId', async (req, res) => {
   const { params: { userId }, body: { role }, user: requester } = req;
-  if(!mongoose.Types.ObjectId.isValid(userId)) return res.status(400).json({err: 'USER_ID_INCORRECT', id: userId});
-  if (!['admin', 'user'].includes(role)) return res.status(400).json({err: 'USER_ROLE_INCORRECT', id: userId});
+  if(!mongoose.Types.ObjectId.isValid(userId)) return res.status(400).json({message: 'USER_ID_INCORRECT', data: {id: userId}});
+  if (!['admin', 'user'].includes(role)) return res.status(400).json({message: 'USER_ROLE_INCORRECT', data: {id: userId}});
 
   const user = await UserModel.findById(userId);
-  if (!user) return res.status(404).json({err: 'USER_NOT_FOUND', id: userId});
+  if (!user) return res.status(404).json({message: 'USER_NOT_FOUND', data: {id: userId}});
   const permission = await acl
       .can(requester.role)
       .execute('promote')
       .on('user');
-  if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: userId});
+  if (!permission.granted) return res.status(403).json({message: 'USER_NOT_AUTHORIZED', data: {id: userId}});
 
   user.set({role});
 
   try {
     await user.save();
-    return res.status(202).json({msg: 'USER_PROMOTED', id: userId})
+    return res.status(202).json({message: 'USER_PROMOTED', data: {id: userId}})
   } catch (err) {
-    return res.status(400).json({err: 'USER_UPDATE_FAILED', msg: err});
+    return res.status(400).json({message: 'USER_UPDATE_FAILED', data: {details: err}});
   }
 });
 

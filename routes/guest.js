@@ -9,19 +9,24 @@ const router = express.Router();
 
 router.post('/login', async ({body: {login, passwd}}, res) => {
     const user = await UserModel.findOne({login});
-    if (!user) return res.status(401).json({err: 'USER_NOT_FOUND', login});
+    if (!user) return res.status(401).json({message: 'USER_NOT_FOUND', data: {login}});
 
     const validate = await user.validatePassword(passwd);
-    if (!validate) return res.status(401).json({err: 'ACCESS_DENIED', login});
-    const {_id:id, email, role} = user;
+    if (!validate) return res.status(401).json({message: 'ACCESS_DENIED', data: {login}});
+    const {_id:id, email, role, firstName, lastName } = user;
 
     const payload = { id, email, role };
     const token = jwt.sign(payload, jwtOptions.secretOrKey, { expiresIn: jwtOptions.tokenTTL });
+
     return res.json({
         message: "ok",
         token: token,
         expiresAt: jwtOptions.tokenTTL,
         expiresOn: moment().add(jwtOptions.tokenTTL).valueOf(),
+        userDetails: {
+            firstName,
+            lastName
+        }
     });
 });
 
@@ -32,10 +37,10 @@ router.post('/register', async ({body}, res) => {
         newUser.set(field, body[field]);
     }
     try {
-        await newUser.save()
-        res.status(201).json({msg: 'USER_REGISTERED', id: newUser._id})
+        await newUser.save();
+        res.status(201).json({message: 'USER_REGISTERED', data: {id: newUser._id}})
     } catch (err) {
-        return res.status(400).json({err: 'USER_REGISTER_FAILED', msg: err});
+        return res.status(400).json({message: 'USER_REGISTER_FAILED', data: {details: err}});
     }
 });
 

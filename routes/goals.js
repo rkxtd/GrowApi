@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
         .execute('read')
         .on('goals');
 
-    if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: user._id});
+    if (!permission.granted) return res.status(403).json({message: 'USER_NOT_AUTHORIZED', data: {id: user._id}});
 
     try {
         const goals = await GoalModel.paginate({author: user._id}, {
@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
         return res.status(200).json(goals);
 
     } catch (err) {
-        return res.status(400).json({err: 'GOALS_FETCH_FAILED', msg: err});
+        return res.status(400).json({message: 'GOALS_FETCH_FAILED', data: {details: err}});
     }
 });
 
@@ -35,12 +35,12 @@ router.get('/:goalId', async (req, res) => {
     const { params: { goalId }, user } = req;
 
     if(!mongoose.Types.ObjectId.isValid(goalId)) {
-        return res.status(400).json({err: 'GOAL_ID_INCORRECT', id: goalId});
+        return res.status(400).json({message: 'GOAL_ID_INCORRECT', data: {id: goalId}});
     }
 
     const goal = await GoalModel.findById(goalId);
 
-    if (!goal) return res.status(404).json({err: 'GOAL_NOT_FOUND', id: goalId});
+    if (!goal) return res.status(404).json({message: 'GOAL_NOT_FOUND', data: {id: goalId}});
 
     const permission = await acl
         .can(user.role)
@@ -48,7 +48,7 @@ router.get('/:goalId', async (req, res) => {
         .execute('read')
         .on('goal');
 
-    if (!permission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: user._id});
+    if (!permission.granted) return res.status(403).json({message: 'USER_NOT_AUTHORIZED', data: {id: user._id}});
     await goal
         .populate('criteria')
         .populate('goals')
@@ -64,13 +64,13 @@ router.post('/', async ({body, user}, res) => {
         .on('goal');
 
     if (!permission.granted)
-        return res.status(403).json({err: 'USER_NOT_AUTHORIZED', id: user._id.toString()});
+        return res.status(403).json({message: 'USER_NOT_AUTHORIZED', data: {id: user._id.toString()}});
 
 
     const goal = new GoalModel({...body});
     goal.save(err => {
-        if (err) return res.status(400).json({err: 'GOAL_CREATE_FAILED', msg: err});
-        res.status(201).json({msg: 'GOAL_CREATED', id: goal._id})
+        if (err) return res.status(400).json({message: 'GOAL_CREATE_FAILED', data: {details: err}});
+        res.status(201).json({message: 'GOAL_CREATED', data: {id: goal._id}})
     });
 });
 
@@ -81,12 +81,12 @@ router.put('/:goalId', async (req, res) => {
 
 router.put('/addCriteria/:goalId/:criteriaId', async (req, res) => {
     const { params: { goalId, criteriaId }, user } = req;
-    if(!mongoose.Types.ObjectId.isValid(goalId))  return res.status(400).json({err: 'GOAL_ID_INCORRECT', id: goalId});
-    if(!mongoose.Types.ObjectId.isValid(criteriaId))  return res.status(400).json({err: 'CRITERIA_ID_INCORRECT', id: criteriaId});
+    if(!mongoose.Types.ObjectId.isValid(goalId))  return res.status(400).json({message: 'GOAL_ID_INCORRECT', data: {id: goalId}});
+    if(!mongoose.Types.ObjectId.isValid(criteriaId))  return res.status(400).json({message: 'CRITERIA_ID_INCORRECT', data: {id: criteriaId}});
     const goal = await GoalModel.findById(goalId);
     const criteria = await CriteriaModel.findById(criteriaId);
-    if (!goal) return res.status(404).json({err: 'GOAL_NOT_FOUND', id: goalId});
-    if (!criteria) return res.status(404).json({err: 'CRITERIA_NOT_FOUND', id: criteriaId});
+    if (!goal) return res.status(404).json({message: 'GOAL_NOT_FOUND', data: {id: goalId}});
+    if (!criteria) return res.status(404).json({message: 'CRITERIA_NOT_FOUND', data: {id: criteriaId}});
 
     const goalPermission = await acl
         .can(user.role)
@@ -94,7 +94,7 @@ router.put('/addCriteria/:goalId/:criteriaId', async (req, res) => {
         .execute('update')
         .on('goal');
 
-    if (!goalPermission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', userId: user._id, goalId, criteriaId});
+    if (!goalPermission.granted) return res.status(403).json({message: 'USER_NOT_AUTHORIZED', data: {userId: user._id, goalId, criteriaId}});
 
     const criteriaPermission = await acl
         .can(user.role)
@@ -102,27 +102,27 @@ router.put('/addCriteria/:goalId/:criteriaId', async (req, res) => {
         .execute('update')
         .on('criteria');
 
-    if (!criteriaPermission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', userId: user._id, goalId, criteriaId});
+    if (!criteriaPermission.granted) return res.status(403).json({message: 'USER_NOT_AUTHORIZED', data: {userId: user._id, goalId, criteriaId}});
 
-    if (goal.get('criteria').find(record => record._id.toString() === criteria._id.toString())) return res.status(409).json({err: 'CRITERIA_ALREADY_ASSIGNED_TO_GOAL', goalId, criteriaId });
+    if (goal.get('criteria').find(record => record._id.toString() === criteria._id.toString())) return res.status(409).json({message: 'CRITERIA_ALREADY_ASSIGNED_TO_GOAL', data: { goalId, criteriaId }});
     goal.criteria.push(criteria);
 
     try {
         await goal.save();
-        return res.status(201).json({ msg: 'CRITERIA_ASSIGNED_TO_GOAL', goalId, criteriaId })
+        return res.status(201).json({ message: 'CRITERIA_ASSIGNED_TO_GOAL', data: {goalId, criteriaId }})
     } catch (err) {
-        return res.status(400).json({err: 'CRITERIA_ASSIGN_TO_GOAL_FAILED', goalId, criteriaId });
+        return res.status(400).json({ message: 'CRITERIA_ASSIGN_TO_GOAL_FAILED', data: {goalId, criteriaId }});
     }
 });
 
 router.put('/removeCriteria/:goalId/:criteriaId', async (req, res) => {
     const { params: { goalId, criteriaId }, user } = req;
-    if(!mongoose.Types.ObjectId.isValid(goalId))  return res.status(400).json({err: 'GOAL_ID_INCORRECT', id: goalId});
-    if(!mongoose.Types.ObjectId.isValid(criteriaId))  return res.status(400).json({err: 'CRITERIA_ID_INCORRECT', id: criteriaId});
+    if(!mongoose.Types.ObjectId.isValid(goalId))  return res.status(400).json({message: 'GOAL_ID_INCORRECT', data: {id: goalId}});
+    if(!mongoose.Types.ObjectId.isValid(criteriaId))  return res.status(400).json({message: 'CRITERIA_ID_INCORRECT', data: {id: criteriaId}});
     const goal = await GoalModel.findById(goalId);
     const criteria = await CriteriaModel.findById(criteriaId);
-    if (!goal) return res.status(404).json({err: 'GOAL_NOT_FOUND', id: goalId});
-    if (!criteria) return res.status(404).json({err: 'CRITERIA_NOT_FOUND', id: criteriaId});
+    if (!goal) return res.status(404).json({message: 'GOAL_NOT_FOUND', data: {id: goalId}});
+    if (!criteria) return res.status(404).json({message: 'CRITERIA_NOT_FOUND', data: {id: criteriaId}});
 
     const goalPermission = await acl
         .can(user.role)
@@ -130,7 +130,7 @@ router.put('/removeCriteria/:goalId/:criteriaId', async (req, res) => {
         .execute('update')
         .on('goal');
 
-    if (!goalPermission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', userId: user._id, goalId, criteriaId});
+    if (!goalPermission.granted) return res.status(403).json({message: 'USER_NOT_AUTHORIZED', data: {userId: user._id, goalId, criteriaId}});
 
     const criteriaPermission = await acl
         .can(user.role)
@@ -138,17 +138,17 @@ router.put('/removeCriteria/:goalId/:criteriaId', async (req, res) => {
         .execute('update')
         .on('criteria');
 
-    if (!criteriaPermission.granted) return res.status(403).json({err: 'USER_NOT_AUTHORIZED', userId: user._id, goalId, criteriaId});
+    if (!criteriaPermission.granted) return res.status(403).json({message: 'USER_NOT_AUTHORIZED', data: {userId: user._id, goalId, criteriaId}});
 
-    if (!goal.get('criteria').find(record => record._id.toString() === criteria._id.toString())) return res.status(404).json({err: 'CRITERIA_NOT_ASSIGNED_TO_GOAL', goalId, criteriaId });
+    if (!goal.get('criteria').find(record => record._id.toString() === criteria._id.toString())) return res.status(404).json({message: 'CRITERIA_NOT_ASSIGNED_TO_GOAL', data: {goalId, criteriaId }});
 
     goal.criteria = goal.criteria.filter(record => record._id.toString() !== criteria._id.toString());
 
     try {
         await goal.save();
-        return res.status(201).json({ msg: 'CRITERIA_REMOVED_FROM_GOAL', goalId, criteriaId })
+        return res.status(201).json({ message: 'CRITERIA_REMOVED_FROM_GOAL', data: {goalId, criteriaId }})
     } catch (err) {
-        return res.status(400).json({err: 'CRITERIA_REMOVE_FROM_GOAL_FAILED', goalId, criteriaId });
+        return res.status(400).json({message: 'CRITERIA_REMOVE_FROM_GOAL_FAILED', data: {goalId, criteriaId }});
     }
 });
 
